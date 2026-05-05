@@ -1100,19 +1100,7 @@
       font-feature-settings: 'tnum' on, 'ss01' on;
     }
 
-    /* ============================================================
-       12. PAGE INTRO OVERLAY
-    ============================================================ */
-    #page-intro {
-      position: fixed;
-      inset: 0;
-      background: #ffffff;
-      z-index: 9999;
-      pointer-events: none;
-      opacity: 1;
-      transition: opacity 0.65s ease;
-    }
-    #page-intro.done { opacity: 0; }
+    /* page intro removed — hurt Speed Index */
 
     /* ============================================================
        9. SCROLL PROGRESS BAR
@@ -1396,9 +1384,6 @@
   </style>
 </head>
 <body>
-
-  <!-- Page intro overlay -->
-  <div id="page-intro" aria-hidden="true"></div>
 
   <!-- Scroll progress bar -->
   <div id="scroll-progress" aria-hidden="true"></div>
@@ -1919,14 +1904,6 @@
   <script>
     (function () {
       'use strict';
-
-      /* ---- 0a. PAGE INTRO FADE ---- */
-      var intro = document.getElementById('page-intro');
-      if (intro) {
-        window.addEventListener('load', function () {
-          setTimeout(function () { intro.classList.add('done'); }, 80);
-        });
-      }
 
       /* ---- 0b. SCROLL PROGRESS BAR ---- */
       var progressBar = document.getElementById('scroll-progress');
