@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "PowerShell(Start-Process \"c:\\\\Users\\\\Leopoldo\\\\Desktop\\\\landing\\\\index.html\")"
+      "PowerShell(Start-Process \"c:\\\\Users\\\\Leopoldo\\\\Desktop\\\\landing\\\\index.html\")",
+      "WebFetch(domain:pagespeed.web.dev)"
     ]
   }
 }

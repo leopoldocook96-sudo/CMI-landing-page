@@ -1088,9 +1088,324 @@
       .hero__heading { letter-spacing: -0.025em; }
       .cta-section__title { letter-spacing: -0.02em; }
     }
+
+    /* ============================================================
+       10. FONT FEATURE SETTINGS
+    ============================================================ */
+    body {
+      font-feature-settings: 'ss01' on, 'cv01' on;
+      text-rendering: optimizeLegibility;
+    }
+    .stat-number {
+      font-feature-settings: 'tnum' on, 'ss01' on;
+    }
+
+    /* ============================================================
+       12. PAGE INTRO OVERLAY
+    ============================================================ */
+    #page-intro {
+      position: fixed;
+      inset: 0;
+      background: #ffffff;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.65s ease;
+    }
+    #page-intro.done { opacity: 0; }
+
+    /* ============================================================
+       9. SCROLL PROGRESS BAR
+    ============================================================ */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(90deg, #1a4bed 0%, #33a3ff 100%);
+      z-index: 200;
+      will-change: width;
+    }
+
+    /* ============================================================
+       1. CUSTOM CURSOR
+    ============================================================ */
+    @media (hover: hover) and (pointer: fine) {
+      body, a, button { cursor: none; }
+    }
+    #cursor-dot {
+      position: fixed;
+      width: 7px;
+      height: 7px;
+      background: var(--color-accent-deep);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s ease, transform 0.1s ease;
+      will-change: left, top;
+      display: none;
+    }
+    #cursor-ring {
+      position: fixed;
+      width: 34px;
+      height: 34px;
+      border: 1.5px solid rgba(26, 75, 237, 0.45);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9997;
+      transform: translate(-50%, -50%);
+      transition: width 0.35s var(--ease-out-expo),
+                  height 0.35s var(--ease-out-expo),
+                  border-color 0.35s ease,
+                  opacity 0.2s ease;
+      will-change: left, top;
+      display: none;
+    }
+    #cursor-ring.is-hovering {
+      width: 50px;
+      height: 50px;
+      border-color: rgba(26, 75, 237, 0.7);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      #cursor-dot, #cursor-ring { display: block; }
+    }
+
+    /* ============================================================
+       2. SHIMMER ON PRIMARY BUTTON
+    ============================================================ */
+    .btn--primary {
+      overflow: hidden;
+      position: relative;
+    }
+    .btn--primary::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -110%;
+      width: 65%;
+      height: 100%;
+      background: linear-gradient(
+        105deg,
+        transparent 20%,
+        rgba(255,255,255,0.28) 50%,
+        transparent 80%
+      );
+      transform: skewX(-18deg);
+    }
+    .btn--primary:hover::after {
+      left: 140%;
+      transition: left 0.52s ease;
+    }
+
+    /* ============================================================
+       3. DOT GRID TEXTURE ON HERO
+    ============================================================ */
+    .hero {
+      background-image:
+        radial-gradient(circle, rgba(26,75,237,0.045) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    /* ============================================================
+       5. MARQUEE TICKER
+    ============================================================ */
+    .marquee {
+      width: 100%;
+      overflow: hidden;
+      background: var(--color-bg-gray);
+      border-top: var(--card-border);
+      border-bottom: var(--card-border);
+      padding: 1.1rem 0;
+      user-select: none;
+    }
+    .marquee__track {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      width: max-content;
+      animation: marquee-scroll 28s linear infinite;
+    }
+    .marquee:hover .marquee__track { animation-play-state: paused; }
+    .marquee__item {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+    .marquee__sep {
+      color: var(--color-accent-deep);
+      font-size: 1.1rem;
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+    @keyframes marquee-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ============================================================
+       4. CÓMO FUNCIONA — SECTION
+    ============================================================ */
+    .process-grid {
+      display: grid;
+      grid-template-columns: 1fr 80px 1fr 80px 1fr;
+      align-items: center;
+      margin-top: 4rem;
+      gap: 0;
+    }
+    .process-step {
+      background: var(--color-bg-white);
+      border: var(--card-border);
+      border-radius: var(--card-radius);
+      padding: 2.5rem 1.75rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: var(--card-shadow);
+      transition: box-shadow var(--transition-base), transform var(--transition-base);
+    }
+    .process-step:hover {
+      box-shadow: var(--card-shadow-hover);
+      transform: translateY(-3px);
+    }
+    .process-step__num {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-accent-deep);
+      background: rgba(26,75,237,0.07);
+      border: 1px solid rgba(26,75,237,0.14);
+      border-radius: 100px;
+      padding: 0.22rem 0.8rem;
+    }
+    .process-step__icon {
+      width: 54px;
+      height: 54px;
+      background: rgba(26,75,237,0.07);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-accent-deep);
+    }
+    .process-step__title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+      line-height: 1.3;
+    }
+    .process-step__desc {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+    }
+    .process-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 0 0.5rem;
+    }
+    .process-connector__line {
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(26,75,237,0.18), rgba(51,163,255,0.45), rgba(26,75,237,0.18));
+      border-radius: 2px;
+    }
+    .process-connector__arrow {
+      font-size: 1rem;
+      color: var(--color-accent-deep);
+      opacity: 0.5;
+      font-weight: 700;
+    }
+    @media (max-width: 900px) {
+      .process-grid {
+        grid-template-columns: 1fr;
+        max-width: 440px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .process-connector {
+        flex-direction: row;
+        height: 40px;
+        padding: 0;
+      }
+      .process-connector__line {
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(180deg, rgba(26,75,237,0.18), rgba(51,163,255,0.45), rgba(26,75,237,0.18));
+      }
+      .process-connector__arrow { transform: rotate(90deg); }
+    }
+
+    /* ============================================================
+       6. SERVICE CARD GRADIENT ON HOVER
+    ============================================================ */
+    .service-card { position: relative; overflow: hidden; }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--card-radius);
+      background: radial-gradient(ellipse at 50% 110%, rgba(26,75,237,0.07) 0%, transparent 65%);
+      opacity: 0;
+      transition: opacity 0.45s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-card > * { position: relative; z-index: 1; }
+
+    /* ============================================================
+       7. STATS BIGGER NUMBERS
+    ============================================================ */
+    .stat-number {
+      font-size: clamp(2.25rem, 4vw, 3.5rem) !important;
+    }
+    .stat-item { padding: 2.75rem 1.5rem; }
+
+    /* ============================================================
+       8. FAQ BLUE LEFT BORDER ON OPEN
+    ============================================================ */
+    .faq-answer[hidden] {
+      border-left: 2px solid transparent !important;
+      padding-left: 0 !important;
+    }
+    .faq-answer:not([hidden]) {
+      border-left: 2px solid var(--color-accent-deep);
+      padding-left: 1.25rem;
+      margin-left: 0.25rem;
+    }
+
+    /* ============================================================
+       11. REPLACE EMOJI — warning SVG icon style
+    ============================================================ */
+    .warn-icon {
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: #d97706;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Page intro overlay -->
+  <div id="page-intro" aria-hidden="true"></div>
+
+  <!-- Scroll progress bar -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Custom cursor -->
+  <div id="cursor-dot"  aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
 
   <!-- ============================================================
        NAVIGATION
@@ -1164,6 +1479,29 @@
       </div>
     </section>
 
+    <!-- MARQUEE TICKER -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span class="marquee__item">Páginas Web</span><span class="marquee__sep">·</span>
+        <span class="marquee__item">Agentes de IA</span><span class="marquee__sep">·</span>
+        <span class="marquee__item">Facebook Ads</span><span class="marquee__sep">·</span>
+        <span class="marquee__item">Contenido Orgánico</span><span class="marquee__sep">·</span>
+        <span class="marquee__item">Landing Pages</span><span class="marquee__sep">·</span>
+        <span class="marquee__item">Automatización</span><span class="marquee__sep">·</span>
+        <span class="marquee__item">Marketing Digital</span><span class="marquee__sep">·</span>
+        <span class="marquee__item">Inteligencia Artificial</span><span class="marquee__sep">·</span>
+        <!-- duplicate for seamless loop -->
+        <span class="marquee__item">Páginas Web</span><span class="marquee__sep">·</span>
+        <span class="marquee__item">Agentes de IA</span><span class="marquee__sep">·</span>
+        <span class="marquee__item">Facebook Ads</span><span class="marquee__sep">·</span>
+        <span class="marquee__item">Contenido Orgánico</span><span class="marquee__sep">·</span>
+        <span class="marquee__item">Landing Pages</span><span class="marquee__sep">·</span>
+        <span class="marquee__item">Automatización</span><span class="marquee__sep">·</span>
+        <span class="marquee__item">Marketing Digital</span><span class="marquee__sep">·</span>
+        <span class="marquee__item">Inteligencia Artificial</span><span class="marquee__sep">·</span>
+      </div>
+    </div>
+
     <!-- ============================================================
          SERVICIOS
     ============================================================ -->
@@ -1185,7 +1523,7 @@
           <!-- Card 1 -->
           <article class="service-card animate-card" style="--card-delay: 0ms">
             <div class="service-card__problem">
-              <span class="service-card__problem-icon">⚠️</span>
+              <svg class="warn-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
               <p class="service-card__problem-text">Tu negocio no existe en internet</p>
             </div>
             <div class="service-card__divider" aria-hidden="true">↓</div>
@@ -1205,7 +1543,7 @@
           <!-- Card 2 -->
           <article class="service-card animate-card" style="--card-delay: 80ms">
             <div class="service-card__problem">
-              <span class="service-card__problem-icon">⚠️</span>
+              <svg class="warn-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
               <p class="service-card__problem-text">Tienes visitas pero no conviertes</p>
             </div>
             <div class="service-card__divider" aria-hidden="true">↓</div>
@@ -1225,7 +1563,7 @@
           <!-- Card 3 -->
           <article class="service-card animate-card" style="--card-delay: 160ms">
             <div class="service-card__problem">
-              <span class="service-card__problem-icon">⚠️</span>
+              <svg class="warn-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
               <p class="service-card__problem-text">Pierdes tiempo en tareas repetitivas</p>
             </div>
             <div class="service-card__divider" aria-hidden="true">↓</div>
@@ -1245,7 +1583,7 @@
           <!-- Card 4 -->
           <article class="service-card animate-card" style="--card-delay: 240ms">
             <div class="service-card__problem">
-              <span class="service-card__problem-icon">⚠️</span>
+              <svg class="warn-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
               <p class="service-card__problem-text">Publicas contenido pero nadie te ve</p>
             </div>
             <div class="service-card__divider" aria-hidden="true">↓</div>
@@ -1265,7 +1603,7 @@
           <!-- Card 5 -->
           <article class="service-card animate-card" style="--card-delay: 320ms">
             <div class="service-card__problem">
-              <span class="service-card__problem-icon">⚠️</span>
+              <svg class="warn-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
               <p class="service-card__problem-text">Gastas en publicidad y no ves resultados</p>
             </div>
             <div class="service-card__divider" aria-hidden="true">↓</div>
@@ -1281,6 +1619,64 @@
               <a href="#consulta" class="service-card__link">Quiero mejores resultados →</a>
             </div>
           </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CÓMO FUNCIONA
+    ============================================================ -->
+    <section class="section section--white" aria-labelledby="proceso-heading">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <span class="section-label">El Proceso</span>
+          <h2 id="proceso-heading" class="section-title">
+            Tres pasos para transformar<br>tu negocio con IA
+          </h2>
+          <p class="section-sub animate-sub">
+            Sin tecnicismos. Sin burocracia. Un proceso claro desde el primer día.
+          </p>
+        </div>
+
+        <div class="process-grid">
+
+          <div class="process-step animate-card" style="--card-delay:0ms">
+            <span class="process-step__num">01</span>
+            <div class="process-step__icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3 class="process-step__title">Consulta Estratégica Gratuita</h3>
+            <p class="process-step__desc">Analizamos tu negocio, entendemos tus metas y diseñamos la estrategia de IA ideal para tu situación específica.</p>
+          </div>
+
+          <div class="process-connector" aria-hidden="true">
+            <div class="process-connector__line"></div>
+            <span class="process-connector__arrow">→</span>
+          </div>
+
+          <div class="process-step animate-card" style="--card-delay:120ms">
+            <span class="process-step__num">02</span>
+            <div class="process-step__icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <h3 class="process-step__title">Diseño y Construcción</h3>
+            <p class="process-step__desc">Nuestro equipo construye tu solución con IA en tiempo récord. Tú apruebas cada paso antes de seguir adelante.</p>
+          </div>
+
+          <div class="process-connector" aria-hidden="true">
+            <div class="process-connector__line"></div>
+            <span class="process-connector__arrow">→</span>
+          </div>
+
+          <div class="process-step animate-card" style="--card-delay:240ms">
+            <span class="process-step__num">03</span>
+            <div class="process-step__icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+            <h3 class="process-step__title">Lanzamiento y Resultados</h3>
+            <p class="process-step__desc">Lanzamos, medimos y optimizamos contigo. No desaparecemos: somos tu equipo de IA a largo plazo.</p>
+          </div>
 
         </div>
       </div>
@@ -1524,6 +1920,64 @@
     (function () {
       'use strict';
 
+      /* ---- 0a. PAGE INTRO FADE ---- */
+      var intro = document.getElementById('page-intro');
+      if (intro) {
+        window.addEventListener('load', function () {
+          setTimeout(function () { intro.classList.add('done'); }, 80);
+        });
+      }
+
+      /* ---- 0b. SCROLL PROGRESS BAR ---- */
+      var progressBar = document.getElementById('scroll-progress');
+      function updateProgress() {
+        var scrollTop  = window.scrollY;
+        var docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        if (progressBar) progressBar.style.width = pct + '%';
+      }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+
+      /* ---- 0c. CUSTOM CURSOR ---- */
+      var dot  = document.getElementById('cursor-dot');
+      var ring = document.getElementById('cursor-ring');
+      var ringX = 0, ringY = 0, dotX = 0, dotY = 0;
+      var rafCursor;
+
+      if (dot && ring && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        document.addEventListener('mousemove', function (e) {
+          dotX = e.clientX; dotY = e.clientY;
+          dot.style.left  = dotX + 'px';
+          dot.style.top   = dotY + 'px';
+          if (!rafCursor) rafCursor = requestAnimationFrame(animateRing);
+        });
+
+        function animateRing() {
+          rafCursor = null;
+          ringX += (dotX - ringX) * 0.14;
+          ringY += (dotY - ringY) * 0.14;
+          ring.style.left = ringX + 'px';
+          ring.style.top  = ringY + 'px';
+          if (Math.abs(dotX - ringX) > 0.5 || Math.abs(dotY - ringY) > 0.5) {
+            rafCursor = requestAnimationFrame(animateRing);
+          }
+        }
+
+        document.querySelectorAll('a, button').forEach(function (el) {
+          el.addEventListener('mouseenter', function () { ring.classList.add('is-hovering'); });
+          el.addEventListener('mouseleave', function () { ring.classList.remove('is-hovering'); });
+        });
+
+        document.addEventListener('mouseleave', function () {
+          dot.style.opacity  = '0';
+          ring.style.opacity = '0';
+        });
+        document.addEventListener('mouseenter', function () {
+          dot.style.opacity  = '1';
+          ring.style.opacity = '1';
+        });
+      }
+
       /* ---- 1. NAV: scroll class + hamburger ---- */
       var nav       = document.getElementById('nav');
       var hamburger = document.getElementById('hamburger');
@@ -1536,6 +1990,7 @@
         } else {
           nav.classList.remove('nav--scrolled');
         }
+        updateProgress();
       }
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
